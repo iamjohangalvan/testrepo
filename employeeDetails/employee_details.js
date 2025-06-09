@@ -1,7 +1,28 @@
 const employees = [
-  { id: 1, name: "John Doe", age: 30, department: "IT", salary: 50000 },
-  { id: 2, name: "Alice Smith", age: 28, department: "HR", salary: 45000 },
-  { id: 3, name: "Bob Johnson", age: 35, department: "Finance", salary: 60000 },
+  {
+    id: 1,
+    name: "John Doe",
+    age: 30,
+    department: "IT",
+    salary: 50000,
+    specialization: "JavaScript",
+  },
+  {
+    id: 2,
+    name: "Alice Smith",
+    age: 28,
+    department: "HR",
+    salary: 45000,
+    specialization: "Python",
+  },
+  {
+    id: 3,
+    name: "Bob Johnson",
+    age: 35,
+    department: "Finance",
+    salary: 60000,
+    specialization: "Java",
+  },
   //... More employee records can be added here
 ];
 
@@ -16,6 +37,8 @@ function displayEmployees() {
   document.getElementById("employeesDetails").innerHTML = totalEmployees;
 }
 
+document.getElementById("employees").onclick = () => displayEmployees();
+
 function calculateTotalSalaries() {
   const totalSalaries = employees.reduce(
     (acc, employee) => acc + employee.salary,
@@ -23,6 +46,8 @@ function calculateTotalSalaries() {
   );
   alert(`Total Salaries: $${totalSalaries}`);
 }
+
+document.getElementById("salary").onclick = () => calculateTotalSalaries();
 
 function displayHREmployees() {
   const hrEmployees = employees.filter(
@@ -37,6 +62,8 @@ function displayHREmployees() {
   document.getElementById("employeesDetails").innerHTML = hrEmployeesDisplay;
 }
 
+document.getElementById("hr").onclick = () => displayHREmployees();
+
 function findEmployeeById(employeeId) {
   const foundEmployee = employees.find(
     (employee) => employee.id === employeeId
@@ -50,3 +77,22 @@ function findEmployeeById(employeeId) {
       "no employee has been found with this ID";
   }
 }
+
+document.getElementById("findId").onclick = () => findEmployeeById(2);
+
+function findEmployeeBySpecialization(employeeSpecialization) {
+  const findEmployee = employees.find(
+    (employee) => employee.specialization === employeeSpecialization
+  );
+  if (findEmployee) {
+    document.getElementById(
+      "employeesDetails"
+    ).innerHTML = `<p>${findEmployee.id}: ${findEmployee.name}: ${findEmployee.name} - ${findEmployee.department} - ${findEmployee.specialization}</p>`;
+  } else {
+    document.getElementById("employeesDetails").innerHTML =
+      "no employees has been found with this Specialization";
+  }
+}
+
+document.getElementById("findSpec").onclick = () =>
+  findEmployeeBySpecialization("JavaScript");
